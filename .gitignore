@@ -1,0 +1,24 @@
+# .gitignore
+
+# Python-specific
+*.pyc
+*.pyo
+__pycache__/
+.pyc.aux
+.pyc.sw
+.venv/
+venv/
+env/
+.env
+
+# IDE/Editor specific
+.idea/
+.vscode/
+
+# Operating System specific
+.DS_Store
+Thumbs.db
+
+# General
+node_modules/
+
