@@ -1,7 +1,7 @@
 import ollama
 
 
-def prompt(model: str, message: str) -> str:
+def prompt_model(model: str, message: str) -> str:
     prompt = f"""
     You are a code execution engine that receives a user request and translates it into a Python function call. Your output should be a JSON string.
 
@@ -16,9 +16,18 @@ def prompt(model: str, message: str) -> str:
     * print_to_user : Print a message to the user.
         * print_to_user parameters : In order its a message variable that is a string.
 
-    * prompt : Prompt the model and return a response as a string.
+    * prompt_model : Prompt the model and return a response as a string.
         * prompt parameters : In order its a model variable that is a string and a message variable that is a string.
 
+    * create : Create a new empty file.
+        * create parameters: In order its a file_name variable that is a string of the file_name that includes the extension.
+
+    * write : Write to a file.
+        * write parameters: In order its a file_name variable that is a string of the file_name that includes the extensions and a content variable that is a str that holds the contents that should be written to the file.
+
+    After running a function or command you will either be prompted with a '0' or a '1'. A '0' means the function or command ran successfully, if its a '1' the funciton or command was unsuccessfull.
+
+    If a function or command is ran successfully, meaning you were promted with a '0' you may move on to the next function or command needed to run to complete the task.
 
     Example:
 
@@ -54,24 +63,38 @@ def prompt(model: str, message: str) -> str:
     return response['message']['content']
 
 
-def print_to_user(message: str):
+def print_to_user(message: str) -> int:
     print(f"{message}")
+    return 0
 
 
-def test_calc(a: int, b: int) -> int:
-    return a * b
+def create_file(file_name: str) -> int:
+    try:
+        file = open(file_name, 'x')
+        return 0
+    except Exception as e:
+        return 1
 
 
-FUNCTION_DICT = {
-    "print_to_user": print_to_user,
-    "prompt": prompt
-}
+def write_to_file(file_name: str, content: str) -> int:
+    try:
+        with open(file_name, 'w') as file:
+            file.write(content)
+        return 0
+    except Exception as e:
+        return 1
 
 
 def execute_function(function_name, parameters):
+    result = None
     if function_name == "print_to_user":
-        print_to_user(parameters["message"])
-    elif function_name == "prompt":
-        prompt(parameters["model"], parameters["message"])
+        result = print_to_user(parameters["message"])
+    elif function_name == "prompt_model":
+        result = prompt_model(parameters["model"], parameters["message"])
+    elif function_name == "create":
+        result = create_file(parameters["file_name"])
+    elif function_name == "write":
+        result = write_to_file(parameters["file_name"], parameters["content"])
     else:
         print(f"Unkown function {function_name}")
+    return result
