@@ -22,7 +22,6 @@ class Template:
         print(self.template)
 
     def templateGet(self, name: str):
-
         return self.template.get(name)
 
     def visulizeTemplate(self):

@@ -11,3 +11,6 @@ Using an LLM it will be able to generate more specific boilerplate code for the 
 I'll probably end up using a json to represent the templates and the structure similar to how clint does templates (but without the code, just the structure).
 
 Hopefully, the LLM will be able to tailor the boilerplate code to the project based either on the name of the project or a description of the project that is set in the template.
+
+I have the model generating code and writing to the appropriate file, but the model generates '```' at the beginning and the end of the file. As well as having the language at the top. So for now I just have a list to check what file type it is and then remove the correct language that is put at the top. But for now it works.
+
