@@ -1,0 +1,129 @@
+{
+  "dir": [
+    {
+      "dir_name": "baisc_web_app"
+    },
+    {
+      "dir_contents": [
+        {
+          "files": {
+            "file_names": ["README.md", ".gitignore", "requirements.txt"]
+          }
+        },
+        {
+          "dir": [
+            {
+              "dir_name": "src"
+            },
+            {
+              "dir_contents": [
+                {
+                  "files": {
+                    "file_names": ["__init__.py", "main.py", "utils.py", "models.py"]
+                  }
+                },
+                {
+                  "dir": [
+                    {
+                      "dir_name": "components"
+                    },
+                    {
+                      "dir_contents": [
+                        {
+                          "files": {
+                            "file_names": ["InputComponent.js", "OutputComponent.js", "LoadingComponent.js"]
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "dir": [
+                        {
+                          "dir_name": "config"
+                        },
+                        {
+                          "dir_contents": [
+                            {
+                              "files": {
+                                "file_names": ["config.js"]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "dir": [
+                        {
+                          "dir_name": "backend"
+                        },
+                        {
+                          "dir_contents": [
+                            {
+                              "files": {
+                                "file_names": ["server.js", "model_handler.js"]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "dir": [
+                        {
+                          "dir_name": "public"
+                        },
+                        {
+                          "dir_contents": [
+                            {
+                              "files": {
+                                "file_names": ["index.html", "favicon.ico"]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "dir": [
+                        {
+                          "dir_name": "docs"
+                        },
+                        {
+                          "dir_contents": [
+                            {
+                              "files": {
+                                "file_names": ["README.md"]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "dir": [
+                        {
+                          "dir_name": "tests"
+                        },
+                        {
+                          "dir_contents": [
+                            {
+                              "files": {
+                                "file_names": ["__init__.py", "test_main.py"]
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+

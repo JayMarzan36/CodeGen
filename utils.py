@@ -2,6 +2,14 @@ import os
 import ollama
 
 
+def get_models() -> dict:
+    response_list: ollama.ListResponse = ollama.list()
+    model_dict = {}
+    for model in response_list.models:
+        model_dict[f"{model.model}"] = model
+    return model_dict
+
+
 def prompt_model(model: str, message: str) -> str:
     response: ollama.ChatResponse = ollama.chat(model=model, messages=[{
         'role': 'user',

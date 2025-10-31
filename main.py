@@ -3,14 +3,22 @@ import json
 import utils
 from template import Template
 
-response = ""
 # Get task
-# user_project = input("Whats the project? : ")
-user_project = "I want to make a test library to help test out my code"
-# Ollama/model initialization
-# TODO: get list of models available and allow user to choose
-model = "gemma3:4b"
+user_project = input("Whats the project? : ")
 
+# Ollama/model initialization
+
+model_dict = utils.get_models()
+
+model_names = model_dict.keys()
+
+print("Please select a model by inputing the whole name shown")
+
+for i in model_dict.keys():
+    print(f"\tModel  :  {i}")
+
+
+model = input("What model to use: ")
 
 # prompt the model to select the best user defined template to use given the user project
 # Get user Templates
@@ -66,7 +74,10 @@ languages = {
     "cpp": "cpp",
     "java": "java",
     "txt": "txt",
-    "md": "md"
+    "md": "md",
+    ".js": "js",
+    ".html": "html",
+    ".css": "css"
 }
 
 
@@ -94,4 +105,4 @@ for file in file_names:
 
     utils.write_to_file(current_file_path, code_response)
 
-print("Complete")
+print("\x1B[38;5;46mComplete")
