@@ -1,5 +1,6 @@
 import os
 import ollama
+import time
 
 
 def get_models() -> dict:
@@ -41,5 +42,27 @@ def get_user_templates(folder_path: str = "templates/"):
             folder_path) if os.path.isfile(os.path.join(folder_path, f))]
         return file_names
     except FileNotFoundError:
-        print(f"Error: Folder '{folder_path}' not found")
+        print("E\x1B[38;5;96mError: Folder '{folder_path}' not found\x1B[0m")
         return []
+
+
+def loading_bar(percentage: int, message: str = "Percentage"):
+    if not 0 <= percentage <= 100:
+        print("\x1B[38;5;96mError: Percentage must be between 0 and 100.\x1B[0m")
+        return
+
+    bar_length = 50
+    filled_length = int(bar_length * percentage / 100)
+    bar = '=' * filled_length + '-' * (bar_length - filled_length)
+    print(f'\r\x1B[38;5;46m{message}: |{bar}| {percentage}%\x1B[0m', end='')
+
+    while percentage < 100:
+        time.sleep(0.05)
+        percentage += 1
+
+        filled_length = int(bar_length * percentage / 100)
+        bar = '=' * filled_length + '-' * (bar_length - filled_length)
+        print(f'\r\x1B[38;5;46m{message}: |{
+            bar}| {percentage}%\x1B[0m', end='')
+
+    print()

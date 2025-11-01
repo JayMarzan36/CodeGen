@@ -79,8 +79,6 @@ class Template:
         makeStruct(data)
         print("Created Directory with following structure")
 
-        self.visulizeTemplate()
-
 
 if __name__ == "__main__":
     template = Template(path="templates/test.json")

@@ -14,3 +14,5 @@ Hopefully, the LLM will be able to tailor the boilerplate code to the project ba
 
 I have the model generating code and writing to the appropriate file, but the model generates '```' at the beginning and the end of the file. As well as having the language at the top. So for now I just have a list to check what file type it is and then remove the correct language that is put at the top. But for now it works.
 
+
+The program now works as wanted, there are still some things I want to test (i.e. how big of a template it can handle and what other models output). I added some more color and cleaned up the input and output of the program a little bit.

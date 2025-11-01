@@ -3,10 +3,7 @@ import json
 import utils
 from template import Template
 
-# Get task
 user_project = input("Whats the project? : ")
-
-# Ollama/model initialization
 
 model_dict = utils.get_models()
 
@@ -17,11 +14,7 @@ print("Please select a model by inputing the whole name shown")
 for i in model_dict.keys():
     print(f"\tModel  :  {i}")
 
-
 model = input("What model to use: ")
-
-# prompt the model to select the best user defined template to use given the user project
-# Get user Templates
 user_templates = utils.get_user_templates()
 
 output_format = "{\"template_name\" :\"Template name here\", \"justification\" : \"A brief explanation of why you selected this template\"}"
@@ -48,10 +41,9 @@ try:
         template_name = template_name + "json"
 
     reason = data["justification"]
-
+    utils.loading_bar(100, message="Getting Prompt")
     print(f"Template Name: {template_name}")
     print(f"Reason: {reason}")
-
 
 except json.JSONDecodeError as e:
     print(f"Error decoding response {e}")
@@ -60,7 +52,7 @@ except json.JSONDecodeError as e:
 
 template = Template(f"templates/{template_name}")
 
-print("Template object made")
+print("\x1B[38;5;46mTemplate object made\x1B[0m")
 
 template.makeFromTemplate()
 
@@ -75,17 +67,17 @@ languages = {
     "java": "java",
     "txt": "txt",
     "md": "md",
-    ".js": "js",
-    ".html": "html",
-    ".css": "css"
+    "js": "js",
+    "html": "html",
+    "css": "css"
 }
 
-
+num_of_files = len(file_names)
+counter = 0
 for file in file_names:
     current_file_name = file
     file_extension = current_file_name.split(".")[1]
     current_file_path = template.file_dict.get(current_file_name)
-
     file_prompt = f"""
         Generate code for a project based on a given file name and a project description.
 
@@ -96,13 +88,15 @@ for file in file_names:
         Generate the code for {current_file_name}, incorporating the project description and creating a functional, basic application.  Return the code as a single string.
         """
     code_response = utils.prompt_model(model, file_prompt)
-
     code_response = code_response.replace("```", "")
     language_keys = languages.keys()
     if file_extension in language_keys:
         code_response = code_response.replace(
             languages.get(file_extension), "")
-
     utils.write_to_file(current_file_path, code_response)
+    counter += 1
+    progress = (counter / num_of_files)
+    utils.loading_bar(progress, message=f"Writing to file: {
+                      current_file_name}")
 
-print("\x1B[38;5;46mComplete")
+print("\x1B[38;5;46mComplete\x1B[0m")
